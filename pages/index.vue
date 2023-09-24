@@ -1,5 +1,5 @@
 <template>
-  <IconPlay />
+  <Header />
   <div>Página Inicial</div>
 </template>
 
