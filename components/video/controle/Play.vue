@@ -1,5 +1,3 @@
 <template>
-  <p>
-    <IconPlay />
-  </p>
+  <p>Play</p>
 </template>
