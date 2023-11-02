@@ -10,6 +10,8 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/i18n": "^8.0.0-rc.5",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "nuxt": "^3.7.1"
   },
   "overrides": {

@@ -5,7 +5,16 @@ export default defineNuxtConfig({
     css: "/<rootDir>/assets/css",
   },
   css: ["@/assets/css/main.css"],
-  modules: ["@pinia/nuxt"],
+  modules: [
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    [
+      "@nuxtjs/i18n",
+      {
+        vueI18n: "./i18n",
+      },
+    ],
+  ],
   pinia: {
     storesDirs: ["./stores/**"],
   },
