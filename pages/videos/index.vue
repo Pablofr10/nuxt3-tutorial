@@ -2,6 +2,7 @@
   <div>Vídeos</div>
 
   <NuxtLink to="/videos/favoritos">Favoritos</NuxtLink>
+  <h1>{{ $t("titulo") }}</h1>
   <div class="videos">
     <div v-for="video in videos" :key="video.id">
       <h2>{{ video.descrição }}</h2>
@@ -15,7 +16,9 @@
       />
 
       <div>
-        <button @click="adicionarFavorito(video)">Adicionar Favorito</button>
+        <button @click="adicionarFavorito(video)">
+          {{ $t("textoBotaoFavorito") }}
+        </button>
       </div>
     </div>
   </div>
@@ -25,8 +28,14 @@
 import { Video } from "@/interfaces/video";
 
 const { $toast } = useNuxtApp();
+const { locale } = useI18n();
+
+const buttonName = computed(() => {
+  return locale.value === "pt" ? "Adicionar Favorito" : "Add Favorite";
+});
 
 onMounted(() => {
+  console.log(locale.value);
   $toast.success("Vídeos carregados com sucesso!");
 });
 
