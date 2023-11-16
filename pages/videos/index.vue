@@ -1,26 +1,40 @@
 <template>
-  <div>Vídeos</div>
+  <h1 class="text-4xl text-center">{{ $t("titulo") }}</h1>
+  <div
+    class="grid grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4"
+  >
+    <UCard v-for="video in videos" :key="video.id">
+      <template #header>
+        {{ video.descrição }}
+      </template>
 
-  <NuxtLink to="/videos/favoritos">Favoritos</NuxtLink>
-  <h1>{{ $t("titulo") }}</h1>
-  <div class="videos">
-    <div v-for="video in videos" :key="video.id">
-      <h2>{{ video.descrição }}</h2>
-      <p v-data-horario>{{ video.data_postagem }}</p>
       <iframe
-        width="550"
-        height="400"
+        class="h-48 w-full"
         :src="video.url"
         title="YouTube video player"
         frameborder="0"
       />
 
-      <div>
-        <button @click="adicionarFavorito(video)">
-          {{ $t("textoBotaoFavorito") }}
-        </button>
-      </div>
-    </div>
+      <template #footer>
+        <div class="flex justify-between">
+          <UButton @click="favoritar(video)">
+            {{ $t("textoBotaoFavorito") }}
+          </UButton>
+          <NuxtLink
+            :to="{
+              name: 'videos-id',
+              params: { id: video.id.toString() },
+            }"
+          >
+            <UButton label="Ver vídeo" color="gray">
+              <template #trailing>
+                <UIcon name="i-heroicons-arrow-right-20-solid" />
+              </template>
+            </UButton>
+          </NuxtLink>
+        </div>
+      </template>
+    </UCard>
   </div>
 </template>
 
@@ -29,15 +43,6 @@ import { Video } from "@/interfaces/video";
 
 const { $toast } = useNuxtApp();
 const { locale } = useI18n();
-
-const buttonName = computed(() => {
-  return locale.value === "pt" ? "Adicionar Favorito" : "Add Favorite";
-});
-
-onMounted(() => {
-  console.log(locale.value);
-  $toast.success("Vídeos carregados com sucesso!");
-});
 
 const { adicionarFavorito } = useVideoStore();
 
@@ -67,17 +72,11 @@ const videos: Video[] = [
     data_postagem: "2023-10-05",
   },
 ];
+
+const favoritar = (video: Video) => {
+  adicionarFavorito(video);
+  $toast.success("Adicionado aos favoritos!");
+};
 </script>
 
-<style scoped>
-.videos {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.videos button {
-  display: inline-block;
-}
-</style>
+<style scoped></style>

@@ -14,6 +14,7 @@ export default defineNuxtConfig({
         vueI18n: "./i18n",
       },
     ],
+    "@nuxt/ui",
   ],
   pinia: {
     storesDirs: ["./stores/**"],
