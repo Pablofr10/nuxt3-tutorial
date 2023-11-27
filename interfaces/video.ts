@@ -1,6 +1,6 @@
 export interface Video {
   id: number;
-  descrição: string;
+  descricao: string;
   url: string;
   data_postagem: string;
 }
