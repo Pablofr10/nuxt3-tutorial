@@ -8,6 +8,8 @@
         {{ video.descricao }}
       </template>
 
+      {{ formataData(video.data_postagem, "hh:mm") }}
+
       <iframe
         class="h-48 w-full"
         :src="video.url"
@@ -40,6 +42,7 @@
 
 <script setup lang="ts">
 import { Video } from "@/interfaces/video";
+import formataData from "~/utils/formataData";
 
 const { $toast } = useNuxtApp();
 const { locale } = useI18n();
