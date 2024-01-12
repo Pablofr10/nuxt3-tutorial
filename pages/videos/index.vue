@@ -49,15 +49,17 @@ const { locale } = useI18n();
 
 const { adicionarFavorito } = useVideoStore();
 
-const videos = ref<Video[]>([]);
+const { data: videos, error } = await useFetch("/api/v1/videos");
 
 const favoritar = (video: Video) => {
   adicionarFavorito(video);
   $toast.success("Adicionado aos favoritos!");
 };
 
-onMounted(async () => {
-  videos.value = await $fetch("/api/v1/videos");
+onMounted(() => {
+  if (error.value) {
+    $toast.error(error.value.statusMessage || "");
+  }
 });
 </script>
 

@@ -60,11 +60,16 @@ import type { FormError, FormSubmitEvent } from "#ui/types";
 const isOpen = ref(false);
 
 const route = useRoute();
-const video = ref<Video>({} as Video);
+const { id } = route.params;
 
-onMounted(async () => {
-  video.value = await $fetch(`/api/v1/videos/${route.params.id}`);
-});
+const { data: video } = useFetch(`/api/v1/videos/${id}`);
+
+if (!video.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: "Vídeo não encontrado",
+  });
+}
 
 const router = useRouter();
 const { $toast } = useNuxtApp();
