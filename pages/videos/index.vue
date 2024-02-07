@@ -1,42 +1,44 @@
 <template>
-  <h1 class="text-4xl text-center">{{ $t("titulo") }}</h1>
-  <div
-    class="grid grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4"
-  >
-    <UCard v-for="video in videos" :key="video.id">
-      <template #header>
-        {{ video.descricao }}
-      </template>
+  <div>
+    <h1 class="text-4xl text-center">{{ $t("titulo") }}</h1>
+    <div
+      class="grid grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4"
+    >
+      <UCard v-for="video in videos" :key="video.id">
+        <template #header>
+          {{ video.descricao }}
+        </template>
 
-      {{ formataData(video.data_postagem, "hh:mm") }}
+        {{ formataData(video.data_postagem, "hh:mm") }}
 
-      <iframe
-        class="h-48 w-full"
-        :src="video.url"
-        title="YouTube video player"
-        frameborder="0"
-      />
+        <iframe
+          class="h-48 w-full"
+          :src="video.url"
+          title="YouTube video player"
+          frameborder="0"
+        />
 
-      <template #footer>
-        <div class="flex justify-between">
-          <UButton @click="favoritar(video)">
-            {{ $t("textoBotaoFavorito") }}
-          </UButton>
-          <NuxtLink
-            :to="{
-              name: 'videos-id',
-              params: { id: video.id.toString() },
-            }"
-          >
-            <UButton label="Ver vídeo" color="gray">
-              <template #trailing>
-                <UIcon name="i-heroicons-arrow-right-20-solid" />
-              </template>
+        <template #footer>
+          <div class="flex justify-between">
+            <UButton @click="favoritar(video)">
+              {{ $t("textoBotaoFavorito") }}
             </UButton>
-          </NuxtLink>
-        </div>
-      </template>
-    </UCard>
+            <NuxtLink
+              :to="{
+                name: 'videos-id',
+                params: { id: video.id.toString() },
+              }"
+            >
+              <UButton label="Ver vídeo" color="gray">
+                <template #trailing>
+                  <UIcon name="i-heroicons-arrow-right-20-solid" />
+                </template>
+              </UButton>
+            </NuxtLink>
+          </div>
+        </template>
+      </UCard>
+    </div>
   </div>
 </template>
 
