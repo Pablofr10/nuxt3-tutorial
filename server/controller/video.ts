@@ -14,6 +14,7 @@ export const buscaVideos = async () => {
 
 export const buscaVideoPorId = async (event: H3Event) => {
   const requestId = (await event.context.params?.id) as string;
+  console.log(requestId);
   const resultado = await client.query("SELECT * FROM videos where id = $1", [
     requestId,
   ]);

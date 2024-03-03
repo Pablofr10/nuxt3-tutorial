@@ -64,7 +64,14 @@ const isOpen = ref(false);
 const route = useRoute();
 const { id } = route.params;
 
-const { data: video } = useFetch(`/api/v1/videos/${id}`);
+const { data: video } = await useFetch<Video>(`/api/v1/videos/${id}`);
+
+useSeoMeta({
+  title: "Nuxt - SEO e META",
+  ogDescription: video.value?.descricao || "",
+  ogUrl: video.value?.url || "",
+  ogType: "video.other",
+});
 
 if (!video.value) {
   throw createError({
