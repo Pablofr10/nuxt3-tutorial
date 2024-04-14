@@ -46,6 +46,10 @@
 import { Video } from "@/interfaces/video";
 import formataData from "~/utils/formataData";
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 const { $toast } = useNuxtApp();
 const { locale } = useI18n();
 

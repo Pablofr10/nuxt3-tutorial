@@ -15,6 +15,7 @@ export default defineNuxtConfig({
       },
     ],
     "@nuxt/ui",
+    "nuxt-auth-utils",
   ],
   pinia: {
     storesDirs: ["./stores/**"],
@@ -25,6 +26,19 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
+    },
+  },
+  runtimeConfig: {
+    oauth: {
+      Google: {
+        clientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
+      },
+      OAUTH: {
+        clientId: process.env.NUXT_OAUTH_AUTH0_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_AUTH0_CLIENT_SECRET,
+        domain: process.env.NUXT_OAUTH_AUTH0_DOMAIN,
+      },
     },
   },
 });

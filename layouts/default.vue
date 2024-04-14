@@ -44,7 +44,7 @@
             {{ rota.nome }}
           </NuxtLink>
         </div>
-        <div>
+        <div class="flex items-center">
           <ClientOnly>
             <UButton
               :icon="
@@ -66,6 +66,9 @@
             <option value="pt">pt</option>
             <option value="en">en</option>
           </select>
+          <ClientOnly v-if="loggedIn">
+            <LayoutUsuario class="mx-2" />
+          </ClientOnly>
         </div>
       </div>
     </nav>
@@ -83,6 +86,7 @@
 <script setup lang="ts">
 const { locale } = useI18n();
 const isOpen = ref(false);
+const { loggedIn } = useUserSession();
 
 const colorMode = useColorMode();
 const toggleMenu = () => {
